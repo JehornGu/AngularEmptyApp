@@ -1,0 +1,129 @@
+@import "../../../scss/_variables";
+@import "../../../scss/_mixins";
+
+$counts: 1 !default;
+$min-height: 650px;
+$height: $min-height;
+
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  a {
+    color: $white;
+  }
+
+  .content {
+    width: 100% * $counts;
+    @include clearfix;
+    @include transition(transform, 900ms, ease);
+
+    .item {
+      display: block;
+      width: 100% / $counts;
+      height: $height;
+      min-height: $min-height!important;
+      @include pull-left;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .title {
+        position: absolute;
+        z-index: 1;
+      }
+
+      &.item-pre {
+        background: $gray-f7;
+        position: relative;
+        img {
+          width: 200px;
+          height: 200px;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          @include transform(translate(-50%, -50%));
+        }
+      }
+    }
+  }
+
+  > .controller {
+    .ctrl-btn {
+      position: absolute;
+      left: $padding-main;
+      // padding: $padding-main;
+      top: 40%;
+      text-decoration: none;
+
+      &.next {
+        left: auto;
+        right: $padding-main;
+      }
+    }
+  }
+
+  $pagination-height: 20px;
+  > .pagination {
+    position: absolute;
+    bottom: $padding-main;
+    left: 50%;
+    @include transform(translateX(-50%));
+    @include clearfix;
+
+    .page {
+      @include pull-left;
+      width: 60px;
+      height: $pagination-height;
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        display: block;
+        width: 60px;
+        height: $pagination-height / 2;
+        border-radius: 2px;
+        background: $white;
+        @include transition(height, 600ms, ease);
+        position: absolute;
+        bottom: 0;
+      }
+
+      &.active a {
+        height: $pagination-height;
+      }
+    }
+  }
+
+  // custom
+  .title-wrap {
+    position: absolute;
+    left: 15%;
+    top: 25%;
+    color: $text-color;
+
+    a {
+      color: $white;
+    }
+
+    h1 {
+      color: $white;
+      font-size: $text-size + 5.2rem;
+      letter-spacing: 1rem;
+      margin-bottom: 2.4rem;
+    }
+
+    p {
+      font-size: $text-size + 1.8rem;
+      color: $white;
+      margin-bottom: 2rem;
+    }
+  }
+}

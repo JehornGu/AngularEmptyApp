@@ -1,0 +1,14 @@
+// Body content layout styles
+.header-main { }
+.body-main {
+  $top: $main-header-height;
+  $left: $main-sidebar-width;
+
+  &.body-main-top {
+    margin-top: $top;
+  }
+  &.body-main-left {
+    margin-top: $left;
+  }
+}
+.footer-main { }

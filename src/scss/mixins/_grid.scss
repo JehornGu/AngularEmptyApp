@@ -1,0 +1,33 @@
+// Grid system
+// 使用这些mixins生成语义化栅格列。
+// Generate semantic grid columns with these mixins.
+
+// Centered container element
+// 使container居中
+@mixin container-fixed($gutter: $grid-gutter-width) {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: floor(($gutter / 2));
+  padding-right: ceil(($gutter / 2));
+  @include clearfix;
+  @include border-box;
+}
+
+// Container width
+// container宽度
+@mixin container-width($breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $width in $breakpoints {
+    @include media-breakpoint($breakpoint, $breakpoints, false) {
+      width: map_get($container-screen-widths, $breakpoint);
+    }
+  }
+}
+
+// Creates a wrapper for a series of columns.
+// 为列创建一个容器
+@mixin make-row($gutter: $grid-gutter-width) {
+  margin-left: ceil(($gutter / -2));
+  margin-right: floor(($gutter / -2));
+  @include clearfix;
+  @include border-box;
+}

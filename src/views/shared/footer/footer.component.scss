@@ -1,0 +1,90 @@
+@import "../../../scss/_variables";
+@import "../../../scss/_mixins";
+
+footer.footer-main {
+  $icon-size: 56px;
+
+  background: map_get($theme-colors, primary);
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+  margin-top: 10rem;
+
+  .footer-item {
+    .title {
+      display: inline-block;
+      font-size: $text-size + 1rem;
+      color: $white;
+      border-bottom: 1px solid map_get($theme-colors, pink);
+      padding: 1rem 5.2rem 1rem 0;
+      margin-bottom: 3.6rem;
+    }
+
+    &.share {
+      .pull-left {
+        margin-right: 15px;
+
+        .icon {
+          display: block;
+          width: $icon-size;
+          height: $icon-size + 2px;
+          background: url(/assets/images/common/icons.png) no-repeat -#{$icon-spacing} -136px;
+
+          &.weibo {
+            background-position-x: -$icon-spacing;
+          }
+
+          &.wechat {
+            background-position-x: -($icon-spacing * 2 + $icon-size);
+          }
+
+          &.qq {
+            background-position-x: -($icon-spacing * 3 + $icon-size * 2);
+          }
+        }
+      }
+    }
+
+    &.explore {
+      .links a {
+        display: block;
+        color: map_get($theme-colors, pink);
+        font-size: $text-size + .4rem;
+        line-height: 1;
+        padding-bottom: 1.2rem;
+      }
+    }
+
+    &.subscribe {
+      $bg-color: $white;
+
+      .input-group {
+        width: 314px;
+
+        .form-control, .btn {
+          border-radius: 0;
+        }
+
+        .form-control {
+          border-color: $bg-color;
+          background: rgba($white, 0);
+          color: $white;
+          @include placeholder($bg-color);
+        }
+
+        .btn {
+          text-align: center;
+          text-decoration: none;
+          background: $bg-color;
+          font-size: $text-size + .2rem;
+          letter-spacing: 4px;
+        }
+      }
+
+      .copy {
+        color: $white;
+        font-style: $text-size + .2rem;
+        margin-top: 160px;
+      }
+    }
+  }
+}

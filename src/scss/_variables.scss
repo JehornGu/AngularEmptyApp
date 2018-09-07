@@ -1,0 +1,214 @@
+//
+// Variables
+// 1. Colors, 2. Z-index, 3. Container size, 4. Grid, 5. Scaffolding, 6. Typography, 7. Components
+// --------------------------------------------------
+
+
+//1. Colors
+//
+//## Public colors
+
+//** usual-gray
+$black:                   #000 !default;
+$white:                   #fff !default;
+$gray-darker:             lighten($black, 13.5%) !default; // #222
+$gray-dark:               lighten($black, 20%) !default;   // #333
+$gray:                    lighten($black, 33.5%) !default; // #555
+$gray-light:              lighten($black, 46.7%) !default; // #777
+$gray-lighter:            lighten($black, 93.5%) !default; // #eee
+$white:                   #fff !default;
+$gray-ddd:                #ddd !default;
+$gray-f7:                 #f7f7f7 !default;
+$gray-999:                #999 !default;
+$gray-666:                #666 !default;
+$gray-ccc:                #ccc !default;
+$gray-ed:                 #ededed !default;
+
+//** theme-colors
+$theme-colors: (
+  primary:     #21ABA5,
+  secondary:   #FD3136,
+  third:       #FFB931,
+
+  success:     #45EBA5,
+  danger:      #FE2D37,
+  info:        #4275E5,
+  warn:        #FDD048
+);
+
+//** usual-colors
+$usual-colors: (
+  primary: map_get($theme-colors, primary),
+  success: map_get($theme-colors, success),
+  danger:  map_get($theme-colors, danger),
+  info:    lighten(map_get($theme-colors, info), 5%),
+  warning: map_get($theme-colors, warn),
+  focus:   darken(map_get($theme-colors, primary), 5%),
+  default: $gray-999
+);
+
+//2. Z-index
+//
+//## Public z-index
+$loading-overlay: 1000;
+$header: 100;
+$drop-dialog: 101;
+$scroll-top: 102;
+$tooltip: 103;
+$alert: 104;
+
+//3. Container size
+//
+//## Public container size
+
+//** one-screen-height
+$main-height: 950px;
+
+//** Main header height
+$main-header-height: 80px;
+//** Main sidebar width
+$main-sidebar-width: 120px;
+
+//4. Grid
+//
+//## Grid containers
+
+//** Set all 2 border-box
+$border-box: false;
+
+//** Grid columns
+$grid-columns:                12 !default;
+$grid-gutter-width:           30px !default;
+
+//** Grid breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
+) !default;
+
+//** Container sizes
+$container-max-widths: (
+  xs: 540px,
+  sm: 720px,
+  md: 940px,
+  lg: 1140px
+) !default;
+
+//** Container screen sizes
+$container-screen-widths: (
+  xs: (map_get($container-max-widths, xs) + $grid-gutter-width),
+  sm: (map_get($container-max-widths, sm) + $grid-gutter-width),
+  md: (map_get($container-max-widths, md) + $grid-gutter-width),
+  lg: (map_get($container-max-widths, lg) + $grid-gutter-width)
+) !default;
+
+
+//5. Scaffolding
+//
+//## base styles
+
+//** body background
+$body-bg:               #fff !default;
+//** default font color
+$text-color:            $gray-dark !default;
+//** default link-font color
+$link-color:            $gray-dark !default;
+//** default font size
+$text-size:             1.4rem !default; // 14px when 62.5%
+//** default padding
+$padding-main:          15px !default; // 15px
+//** icon spacing
+$icon-spacing:          10px !default;
+
+//6. Typography
+//
+//## usual font-size & line-height etc
+
+//** Sans serif font
+$font-family:             'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+//** Monospaced font `<code>`, `<kbd>`, `<pre>`
+$font-family-monospace:   Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+//** font-size
+$font-size-base:           $text-size !default;
+$font-size-sm:             ceil(($font-size-base * 1.25));
+$font-size-lg:             ceil(($font-size-base * .85));
+
+//** font-weight
+$font-weight-light:           300 !default;
+$font-weight-normal:          400 !default;
+$font-weight-bold:            700 !default;
+
+$font-weight-base:            $font-weight-normal !default;
+$line-height-base:            1.0 !default;
+
+//** links
+$link-decoration:           none !default;
+$link-hover-color:          darken($link-color, 15%) !default;
+$link-hover-decoration:     underline !default;
+
+//** H label font-size
+$font-size-h: (
+  1: ($font-size-base * 2.6), // ~36px
+  2: ($font-size-base * 2.15), // ~30px
+  3: ($font-size-base * 1.7), // ~24px
+  4: ($font-size-base * 1.25), // ~18px
+  5: $font-size-base,
+  6: ($font-size-base * .85) // ~12px
+);
+
+//** Borders
+$border-width:                1px !default;
+$border-color:                $gray !default;
+$border-radius:               4px;
+
+//7. Components
+//
+//## Component styles
+
+//** Forms
+$form-border-color-base:           $gray-ddd;
+$form-border-width-base:           $border-width;
+$form-border-radius-base:          $border-radius;
+$form-indent-base:                 $padding-main;
+$form-focus-color-base:            map_get($usual-colors, primary);
+$form-height-base:                 3.4rem;
+$form-width-base:                  220px;
+$form-line-height-base:            $form-height-base;
+
+$form-background-base:             $white;
+$form-background-gray:             $gray-ddd;
+$form-background-disabled:         $gray-ed;
+$form-border-disabled:             $gray-ccc;
+$form-font-disabled:               $gray-999;
+$form-disabled-color:              0.7;
+
+$form-colors: (
+  primary:        map_get($usual-colors, primary),
+  success:        map_get($usual-colors, success),
+  danger:         map_get($usual-colors, danger),
+  info:           map_get($usual-colors, info),
+  warning:        map_get($usual-colors, warning),
+  default:        $gray-999
+);
+
+//** Buttons
+$btn-background-colors: map_merge($form-colors, (default: $form-background-gray));
+$btn-font-colors: map_merge($form-colors, (
+  primary:        $white,
+  success:        $white,
+  danger:         $white,
+  info:           $white,
+  warning:        $white,
+  default:        $text-color
+));
+
+//** Checkbox
+$checkbox-size: 1.6rem;
+
+//** Tooltip
+$tooltip-max-width: 20rem;
+
+

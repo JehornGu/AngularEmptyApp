@@ -1,0 +1,23 @@
+.center-block {
+  @include center-block;
+}
+
+.block {
+  display: block;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline {
+  display: inline;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

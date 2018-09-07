@@ -1,0 +1,7 @@
+[
+  { "id": "0", "name": "首页", "link": "/" },
+  { "id": "1", "name": "博客", "link": "/account" },
+  { "id": "2", "name": "新闻", "link": "/account" },
+  { "id": "3", "name": "联系", "link": "/account" },
+  { "id": "4", "name": "关于", "link": "/account" }
+]

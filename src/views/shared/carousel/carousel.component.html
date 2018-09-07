@@ -1,0 +1,50 @@
+<div class="carousel-wrapper">
+  <div class="content" [ngStyle]="contentStyle">
+    <div *ngFor="let banner of banners;">
+      <a class="item"
+         [routerLink]="banner.link"
+         [ngStyle]="itemStyle"
+         target="_blank"
+         *ngIf="banner.link && banner.loaded">
+        <div class="title-wrap">
+          <h1>{{ banner.title }}</h1>
+          <h1>{{ banner.title2 }}</h1>
+          <p>{{ banner.desc }}</p>
+          <app-theme-btn [name]="banner.btn"></app-theme-btn>
+        </div>
+
+        <img [src]="banner.src" [alt]="banner.title" (load)="imgOnLoad($event)">
+      </a>
+      <div class="item"
+           [ngStyle]="itemStyle"
+           *ngIf="!banner.link && banner.loaded">
+        <div class="title-wrap">
+          <h1>{{ banner.title }}</h1>
+          <h1>{{ banner.title2 }}</h1>
+          <p>{{ banner.desc }}</p>
+          <app-theme-btn [name]="banner.btn"></app-theme-btn>
+        </div>
+        <img [src]="banner.src" [alt]="banner.title" (load)="imgOnLoad($event)">
+      </div>
+      <div class="item item-pre" [ngStyle]="itemStyle" *ngIf="!banner.loaded">
+        <img [src]="preSrc" [alt]="banner.title">
+      </div>
+    </div>
+  </div>
+  <div class="controller">
+    <a href="javascript: void(0);" class="ctrl-btn prev" (click)="prev()">
+      <ng-content select="[name=prev]"></ng-content>
+    </a>
+    <a href="javascript: void(0);" class="ctrl-btn next" (click)="next()">
+      <ng-content select="[name=next]"></ng-content>
+    </a>
+  </div>
+  <ul class="pagination">
+    <li class="page"
+        *ngFor="let banner of arr; let i = index;"
+        (click)="go(i)"
+        [ngClass]="{ active: i === current }">
+      <a href="javascript: void(0);"></a>
+    </li>
+  </ul>
+</div>

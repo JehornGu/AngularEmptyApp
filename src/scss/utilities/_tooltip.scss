@@ -1,0 +1,77 @@
+
+.tooltip {
+  $tooltip-bg: rgba($black, .5);
+  $arrow-width: 10px;
+  $arrow-height: $arrow-width / 3 * 2;
+  $arrow-size-n: 10;
+
+  position: absolute;
+  background: $tooltip-bg;
+  color: $white;
+  font-size: $text-size * .8;
+  display: block;
+  z-index: $tooltip;
+  cursor: default;
+
+  > .content {
+    display: inline-block;
+    padding: $padding-main / 2 $padding-main;
+    max-width: $tooltip-max-width;
+  }
+
+  > .arrow {
+    position: absolute;
+  }
+
+  // arrow down
+  &.up {
+    left: 50%;
+    @include transform(translateX(-50%));
+
+    > .arrow {
+      @include triangle-down($arrow-width, $arrow-height, $tooltip-bg);
+      left: 50%;
+      @include transform(translateX(-50%));
+      bottom: -$arrow-height;
+    }
+  }
+
+  // arrow up
+  &.down {
+    left: 50%;
+    @include transform(translateX(-50%));
+
+    > .arrow {
+      @include triangle-up($arrow-width, $arrow-height, $tooltip-bg);
+      left: 50%;
+      @include transform(translateX(-50%));
+      top: -$arrow-height;
+    }
+  }
+
+  // arrow right
+  &.left {
+    top: 50%;
+    @include transform(translateY(-50%));
+
+    > .arrow {
+      @include triangle-right($arrow-width, $arrow-height, $tooltip-bg);
+      top: 50%;
+      @include transform(translateY(-50%));
+      right: -$arrow-height;
+    }
+  }
+
+  // arrow left
+  &.right {
+    top: 50%;
+    @include transform(translateY(-50%));
+
+    > .arrow {
+      @include triangle-left($arrow-width, $arrow-height, $tooltip-bg);
+      top: 50%;
+      @include transform(translateY(-50%));
+      left: -$arrow-height;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<div class="drop-dialog"
+     [ngClass]="direction"
+     [ngStyle]="dialogStyle"
+     [@fade]="state"
+     *ngIf="isShow">
+  <i class="arrow" [ngStyle]="arrowStyle"></i>
+  <div class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

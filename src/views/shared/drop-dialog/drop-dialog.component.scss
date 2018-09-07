@@ -1,0 +1,133 @@
+@import "../../../scss/_variables";
+@import "../../../scss/_mixins";
+
+$border-radius: 4px;
+$border-width: 2px;
+$arrow-size: 10px;
+$arrow-size-n: 10;
+$border-color: map_get($theme-colors, pink);
+$background: $white;
+$arrow-height: #{sqrt(($arrow-size-n * $arrow-size-n / 2))}px;
+
+.drop-dialog {
+  //** default
+  width: 300px;
+  height: 400px;
+
+  position: absolute;
+  z-index: $drop-dialog;
+  background: $background;
+  @include box-shadow(2px 4px 8px 0px rgba($black, .1));
+  //** default
+  border-top: $border-width solid $border-color;
+  @include border-bottom-radius($border-radius);
+
+  > .arrow {
+    display: block;
+    position: absolute;
+    z-index: 0;
+    width: $arrow-size;
+    height: $arrow-size;
+    background: $background;
+    border-top: $border-width solid $border-color;
+    border-right: $border-width solid $border-color;
+    //** default
+    left: 50%;
+    top: -$arrow-height;
+    @include transform(rotate(-45deg));
+  }
+
+  > .content {
+    @include border-box;
+    width: 100%;
+    height: 100%;
+    word-wrap: break-word;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: absolute;
+    z-index: $drop-dialog;
+    color: $text-color;
+
+    //** default
+    @include border-bottom-radius($border-radius);
+  }
+
+  &.bot, &.bottom {
+    border: 0;
+    @include border-radius(0);
+    border-top: $border-width solid $border-color;
+    @include border-bottom-radius($border-radius);
+
+    > .arrow {
+      left: 50%;
+      bottom: auto;
+      // top: -$arrow-height;
+      top: -$arrow-size / 2 - $border-width;
+      @include transform(rotate(-45deg));
+    }
+
+    > .content {
+      @include border-radius(0);
+      @include border-bottom-radius($border-radius);
+      cursor: initial;
+    }
+  }
+
+  &.top {
+    border: 0;
+    @include border-radius(0);
+    border-bottom: $border-width solid $border-color;
+    @include border-top-radius($border-radius);
+
+    > .arrow {
+      left: 50%;
+      top: auto;
+      bottom: -$arrow-height;
+      @include transform(rotate(135deg));
+    }
+
+    > .content {
+      @include border-radius(0);
+      @include border-top-radius($border-radius);
+    }
+  }
+
+  &.left {
+    border: 0;
+    @include border-radius(0);
+    border-right: $border-width solid $border-color;
+    @include border-left-radius($border-radius);
+
+    > .arrow {
+      top: 50%;
+      left: auto;
+      right: -$arrow-height;
+      @include transform(rotate(45deg));
+    }
+
+    > .content {
+      @include border-radius(0);
+      @include border-left-radius($border-radius);
+    }
+  }
+
+  &.right {
+    border: 0;
+    @include border-radius(0);
+    border-left: $border-width solid $border-color;
+    @include border-right-radius($border-radius);
+
+    > .arrow {
+      top: 50%;
+      right: auto;
+      left: -$arrow-height;
+      @include transform(rotate(-135deg));
+    }
+
+    > .content {
+      @include border-radius(0);
+      @include border-right-radius($border-radius);
+    }
+  }
+
+}

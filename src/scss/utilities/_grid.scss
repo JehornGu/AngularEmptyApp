@@ -1,0 +1,35 @@
+// Container widths
+// 设置容器宽度，并且在媒体查询中，为固定的导航栏覆盖它。
+// Set the container width, and override it for fixed navbars in media queries.
+
+.container {
+  @include container-fixed;
+  @include container-width;
+}
+
+
+// Fluid container
+// 使用适用于固定宽度容器的mixin，但是没有定义的宽度用于fluid，full width布局。
+// Utilizes the mixin meant for fixed width containers, but without any defined
+// width for fluid, full width layouts.
+
+.container-fluid {
+  @include container-fixed;
+}
+
+
+// Row
+// Row包括列并清除列的浮动。
+// Rows contain and clear the floats of ur columns.
+
+.row {
+  @include make-row;
+}
+
+
+// Columns
+// 列的公共样式
+// Common styles for small and large grid columns.
+
+@include make-grid-columns;
+@include make-grid;

@@ -1,0 +1,29 @@
+// Grid visualization
+.row.show-grid {
+  $breakpoints: $grid-breakpoints;
+  $columns: $grid-columns;
+  $gutter: $grid-gutter-width / 2;
+
+  margin-top: $gutter;
+  margin-bottom: $gutter;
+
+  %grid-show {
+    background-color: rgba($gray-999, .15);
+    padding-top: $gutter;
+    padding-bottom: $gutter;
+    border: 1px solid rgba($gray-999, .3);
+    @include border-radius(2px);
+  }
+
+  @each $breakpoint in map_keys($breakpoints) {
+    @for $i from 1 through $columns {
+      .col-#{$breakpoint}-#{$i} {
+        @extend %grid-show;
+      }
+    }
+    .col-#{$breakpoint},
+    .col-#{$breakpoint}-auto {
+      @extend %grid-show;
+    }
+  }
+}

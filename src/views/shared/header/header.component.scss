@@ -1,0 +1,150 @@
+@import "../../../scss/_variables";
+@import "../../../scss/_mixins";
+
+header.header-main {
+  $header-height: $main-header-height;
+  $logo-size: 60px;
+  $header-font: $text-size + .6rem;
+  $active-size: 1px;
+  $header-bg: map_get($theme-colors, primary);
+
+  background: rgba($header-bg, 1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: $header;
+  @include transition(all, 300ms, ease);
+
+  .header-item {
+    height: $header-height;
+    line-height: $header-height;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    &.header-item-right {
+      $setting-size: 24px;
+      $setting-padding: 1rem;
+
+      > li {
+        font-size: $header-font;
+
+        a {
+          display: inline-block;
+          line-height: initial;
+          color: $white;
+        }
+
+        &.article a {
+          padding: .6rem 3.8rem;
+          border: 1px solid $white;
+          border-radius: 4px;
+          text-decoration: none;
+        }
+
+        &.sign-in a {
+          padding: 0 3.2rem;
+        }
+
+        &.setting {
+          height: 100%;
+          a {
+            display: block;
+            height: 100%;
+            padding: 0 $setting-padding;
+            position: relative;
+
+            .icon {
+              display: inline-block;
+              width: $setting-size;
+              height: $setting-size + 2px;
+              @include transform(translateY(($header-height - $setting-size) / 2));
+              background: url(/assets/images/common/icons.png) no-repeat -10px -10px;
+              background-position: -10px -100px;
+            }
+          }
+
+          .setting-dialog {
+            padding-top: 25px;
+            padding-bottom: 25px;
+            font-size: $text-size;
+          }
+        }
+      }
+    }
+  }
+
+  .logo {
+    display: inline-block;
+    font-size: $text-size + 4rem;
+    color: $white;
+    text-decoration: none;
+  }
+
+  nav {
+    $item-padding: $padding-main * 1.6;
+
+    position: relative;
+
+    > a {
+      font-size: $header-font;
+      color: $white;
+      padding-left: $item-padding;
+      padding-right: $item-padding;
+      text-decoration: none;
+      // position: relative;
+      overflow: hidden;
+
+      $active-position: $header-font / 6 * 5;
+
+      &.active {
+        color: map_get($theme-colors, pink);
+      }
+
+      &:hover {
+        color: map_get($theme-colors, pink);
+        @include transition();
+      }
+    }
+
+    .active-line {
+      height: $active-size;
+      width: 0;
+      background: map_get($theme-colors, pink);
+      position: absolute;
+      left: $padding-main + $item-padding;
+      bottom: $header-font / 5 * 4;
+      @include transition(all, 0.3s, ease);
+    }
+  }
+
+  &.account {
+    background: rgba($header-bg, 0.9);
+  }
+}
+
+.back-top {
+  $size: 24px;
+
+  display: none;
+  position: fixed;
+  right: 5%;
+  bottom: 10%;
+  background: map_get($theme-colors, pink);
+  padding: $size;
+  @include border-radius($size * 3 / 2);
+  @include box-shadow(2px 4px 8px 1px rgba($black, .3));
+  @include transition(all, 300ms, linear);
+  z-index: $scroll-top;
+
+  &:hover {
+    @include box-shadow(2px 4px 8px 1px rgba($black, .5));
+  }
+
+  .icon {
+    display: block;
+    width: $size;
+    height: $size;
+    background: url(/assets/images/common/icons.png) no-repeat -44px -100px;
+  }
+}

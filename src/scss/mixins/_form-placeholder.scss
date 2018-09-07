@@ -1,0 +1,20 @@
+$placeholder-color: map_get($usual-colors, default);
+
+@mixin placeholder($color: $placeholder-color) {
+  &::-webkit-input-placeholder
+  {
+    color: $color;
+  }
+  &:-moz-input-placeholder
+  {
+    color: $color;
+  }
+  &::-moz-input-placeholder
+  {
+    color: $color;
+  }
+  &:-ms-input-placeholder
+  {
+    color: $color;
+  }
+}

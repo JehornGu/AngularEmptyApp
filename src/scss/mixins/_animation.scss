@@ -1,0 +1,22 @@
+@mixin slideUp($to: 0) {
+  @keyframes slideUp {
+    from {
+      bottom: -100%;
+    }
+    to {
+      bottom: $to;
+    }
+  }
+}
+@mixin slideDown($from: 0) {
+  @keyframes slideDown {
+    from {
+      bottom: $from;
+      display: block;
+    }
+    to {
+      bottom: -100%;
+      display: block;
+    }
+  }
+}

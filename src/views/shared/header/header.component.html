@@ -1,0 +1,48 @@
+<header class="header-main" #header [ngClass]="headerStyle">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-1 header-item">
+        <a routerLink="/" rel="nofollow" class="logo">
+          <i class="icon civ-logo"></i>
+        </a>
+      </div>
+      <nav class="col-lg-5 col-lg-offset-1 header-item clearfix" #navWrap>
+        <a class="block pull-left"
+           *ngFor="let nav of navData; let i = index; let last = last;"
+           [routerLink]="nav.link"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: nav.link === '/' ? true : false }">
+          {{ nav.name }} {{ last ? forRendered(activeLine, navWrap) : '' }}
+        </a>
+        <i class="center-block active-line" #activeLine></i>
+      </nav>
+      <ul class="col-lg-5 header-item header-item-right clearfix">
+        <li class="pull-right article"><a href="javascript: void(0);">随笔</a></li>
+        <li class="pull-right sign-in"><a routerLink="/account/sign-in">登录</a></li>
+        <li class="pull-right setting" (mouseenter)="toggleSetting(1)"
+            (mouseleave)="toggleSetting(0)">
+          <a href="javascript: void(0);">
+            <i class="icon"></i>
+
+            <app-drop-dialog
+              direction="bot"
+              arrow="17px"
+              [position]="['0px', '70px']"
+              [size]="['200px', '254px']"
+              [show]="settingDialog"
+              [delayIn]="500"
+              [delayOut]="300">
+              <div class="wrapper setting-dialog clearfix">
+                <span class="t pull-left">夜间模式</span> <app-switch [init]="false" (change)="change($event)" class="pull-right"></app-switch>
+              </div>
+            </app-drop-dialog>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<a href="javascript: void(0);" class="back-top" (click)="backToTop()" #scrollTop>
+  <i class="icon"></i>
+</a>

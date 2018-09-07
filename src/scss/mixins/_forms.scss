@@ -1,0 +1,214 @@
+$defaults: (
+  display: inline-block,
+  border-width: $form-border-width-base,
+  border-color: $form-border-color-base,
+  background: $form-background-base,
+  font-size: $text-size,
+  color: inherit,
+  border-radius: $form-border-radius-base,
+  width: $form-width-base,
+  height: $form-height-base,
+  line-height: $form-height-base,
+  padding-left: $form-indent-base,
+  padding-right: $form-indent-base,
+  padding-top: 0,
+  padding-bottom: 0,
+  disabled: $form-background-disabled,
+  boder-disabled: $form-border-disabled,
+  font-disabled: $form-font-disabled
+);
+
+$form-control-borders: (left, right, top, bottom);
+$form-control-border-size: 4px;
+
+// Inputs
+// @params () $defaults
+@mixin form-control($options: ()) {
+  $opts: map_merge($defaults, $options);
+
+  display: map_get($opts, display);
+  border: map_get($opts, border-width) solid map_get($opts, border-color);
+  background: map_get($opts, background);
+  color: map_get($opts, color);
+  font-size: map_get($opts, font-size);
+  @include border-radius(map_get($opts, border-radius));
+  width: map_get($opts, width);
+  height: map_get($opts, height);
+  line-height: map_get($opts, line-height);
+  padding: map_get($opts, padding-top) map_get($opts, padding-right) map_get($opts, padding-bottom) map_get($opts, padding-left);
+  @include border-box();
+
+  @each $key in $form-control-borders {
+    &.form-control-#{$key} {
+      border-#{$key}-width: $form-control-border-size;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $form-focus-color-base;
+  }
+
+  &[disabled], &[disabled="disabled"],
+  &[readonly], &[readonly="readonly"] {
+    background: map_get($opts, disabled);
+    border-color: map_get($opts, boder-disabled);
+    color: map_get($opts, font-disabled);
+  }
+
+  &[disabled], &[disabled="disabled"] {
+    cursor: not-allowed;
+  }
+
+  &[readonly], &[readonly="readonly"] {
+    cursor: default;
+  }
+
+  @include placeholder();
+}
+
+// Buttons
+@mixin btn($options: ()) {
+  $btn-defaults: map_merge($defaults, (
+    width: auto
+  ));
+
+  $opts: map_merge($btn-defaults, $options);
+  @include form-control($opts);
+  cursor: pointer;
+
+  &:focus {
+    @include box-shadow(2px 4px 6px 2px rgba($black, .2) inset);
+  }
+}
+
+// Theme buttons
+@mixin theme-btn() {
+  $color: map_get($theme-colors, primary);
+  $padding: $form-indent-base + 50px;
+  $spacing: 0.8rem;
+  $size: $text-size + 0.8rem;
+
+  padding-left: $padding;
+  padding-right: $padding;
+  height: $form-height-base + 2rem;
+  line-height: $form-height-base + 2rem;
+  background: $color;
+  color: $white;
+  font-size: $size;
+  letter-spacing: $spacing;
+  text-indent: $spacing;
+  text-decoration: none;
+  border-radius: 0;
+  border-color: $color;
+}
+
+// Input groups
+@mixin input-group($options: ()) {
+  @include border-box;
+  @include clearfix;
+  width: map_get($defaults, width);
+  display: table;
+  vertical-align: middle;
+  position: relative;
+
+  .form-control {
+    @include border-box;
+    display: table-cell;
+    width: 100%;
+  }
+
+  .addon {
+    @include border-box;
+    display: table-cell;
+    width: auto;
+    white-space: nowrap;
+
+    &.btn {
+      border: 0;
+    }
+  }
+
+  .addon, .form-control {
+    &:last-child {
+      @include border-left-radius(0);
+    }
+  }
+  .addon, .form-control {
+    &:first-child {
+      @include border-right-radius(0);
+    }
+  }
+  .addon {
+    &:first-child {
+      border-right: 0;
+    }
+    &:last-child {
+      border-left: 0;
+    }
+  }
+  .form-control {
+    &:not(:first-child) {
+      @include border-left-radius(0);
+    }
+    &:not(:last-child) {
+      @include border-right-radius(0);
+    }
+  }
+}
+
+// Checkbox
+@mixin checkbox($options: ()) {
+  $border-radius: $form-border-radius-base / 2;
+  display: inline-block;
+  height: $checkbox-size;
+  width: $checkbox-size;
+  border: $form-border-width-base solid $form-border-color-base;
+  border-radius: $border-radius;
+  cursor: pointer;
+  background: $form-background-base;
+  overflow: hidden;
+  @include border-box;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  > .inside {
+    display: none;
+    @include border-box;
+    height: 100%;
+    width: 100%;
+    background: map_get($form-colors, primary);
+    border-radius: $border-radius;
+    @include transition(all, .2s, ease);
+
+    .fa {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      line-height: $checkbox-size;
+      font-size: $checkbox-size / 3 * 2;
+      color: $white;
+    }
+  }
+
+  @each $type, $color in $form-colors {
+    &.#{$type} {
+      @if(map_has_key($usual-colors, $type)) {
+        > .inside {
+          background: map_get($form-colors, $type);
+        }
+      } @else {
+        > .inside {
+          background: map_get($form-colors, primary);
+        }
+      }
+    }
+  }
+
+  &.active > .inside  {
+    display: block;
+  }
+}

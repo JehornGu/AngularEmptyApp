@@ -1,0 +1,92 @@
+//## Framework grid generation
+// 在给定$grid-columns的任何值情况下，仅由Bootstrap使用以生成正确数量的网格类。
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+@mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+  %grid-column {
+    position: relative;
+    min-height: 1px;
+    padding-left: ceil(($gutter / 2));
+    padding-right: floor(($gutter / 2));
+    @include border-box;
+  }
+
+  @each $breakpoint in map_keys($breakpoints) {
+    @for $i from 1 through $columns {
+      .col-#{$breakpoint}-#{$i} {
+        @extend %grid-column;
+      }
+    }
+    .col-#{$breakpoint},
+    .col-#{$breakpoint}-auto {
+      @extend %grid-column;
+    }
+  }
+}
+
+@mixin float-grid-columns($breakpoint, $columns: $grid-columns) {
+  @for $i from 1 through $columns {
+    .col-#{$breakpoint}-#{$i} {
+      float: left;
+    }
+  }
+}
+
+// width, push, pull, offset
+@mixin calc-grid-column($index, $breakpoint, $type, $columns: $grid-columns) {
+  @if($type == width) and ($index > 0) {
+    .col-#{$breakpoint}-#{$index} {
+      width: percentage(($index / $columns));
+    }
+  }
+  @if($type == push) {
+    @if($index > 0) {
+      .col-#{$breakpoint}-push-#{$index} {
+        left: percentage(($index / $columns));
+      }
+    }
+    @if($index == 0) {
+      .col-#{$breakpoint}-push-0 {
+        left: auto;
+      }
+    }
+  }
+  @if($type == pull) {
+    @if($index > 0) {
+      .col-#{$breakpoint}-pull-#{$index} {
+        right: percentage(($index / $columns));
+      }
+    }
+    @if($index == 0) {
+      .col-#{$breakpoint}-pull-0 {
+        right: auto;
+      }
+    }
+
+  }
+  @if($type == offset) {
+    .col-#{$breakpoint}-offset-#{$index} {
+      margin-left: percentage(($index / $columns));
+    }
+  }
+}
+
+@mixin loop-grid-columns($breakpoint, $type, $columns: $grid-columns) {
+  @for $i from 0 through $columns {
+    @include calc-grid-column($i, $breakpoint, $type);
+  }
+}
+
+@mixin make-grid($breakpoints: $grid-breakpoints) {
+  @each $breakpoint, $width in $breakpoints {
+    @include media-breakpoint($breakpoint, $breakpoints) {
+      @include float-grid-columns($breakpoint);
+
+      @include loop-grid-columns($breakpoint, width);
+      @include loop-grid-columns($breakpoint, pull);
+      @include loop-grid-columns($breakpoint, push);
+      @include loop-grid-columns($breakpoint, offset);
+    }
+  }
+}

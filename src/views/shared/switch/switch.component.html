@@ -1,0 +1,8 @@
+<div class="form-switch-wrapper">
+  <label>
+    <div class="form-switch" (click)="toggle($event)" [ngClass]="{ active: value }">
+      <input type="checkbox" name="night" [ngModel]="value">
+      <div class="switch"></div>
+    </div>
+  </label>
+</div>
